@@ -16,15 +16,15 @@ function CardTitle({ icon, title, body }: { icon: React.ReactNode; title: string
 
 const alerts = [
   { label: "Encendido sin autorización", level: "critica" as const },
-  { label: "Desacoplamiento GPS / TAG", level: "alta" as const },
+  { label: "Desacoplamiento de señales", level: "alta" as const },
   { label: "Salida de zona: Casa", level: "media" as const },
   { label: "Exceso de velocidad", level: "baja" as const },
 ];
 
 const commandLog = [
-  { label: "Sirena", state: "Aplicado", time: "03:14" },
-  { label: "Corte de suministro", state: "Aplicado", time: "03:15" },
-  { label: "Corte de suministro", state: "Revertido", time: "08:02" },
+  { label: "Sirena", state: "Aplicado", time: "3:14 AM" },
+  { label: "Corte de suministro", state: "Aplicado", time: "3:15 AM" },
+  { label: "Corte de suministro", state: "Revertido", time: "8:02 AM" },
 ];
 
 export function Features() {

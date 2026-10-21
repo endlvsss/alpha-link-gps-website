@@ -90,7 +90,7 @@ export function Hero() {
             </li>
             <li className="flex items-center gap-2">
               <CheckIcon className="size-4 shrink-0 text-accent-ink" />
-              Doble señal GPS 4G + TAG
+              Señal principal y de respaldo
             </li>
             <li className="flex items-center gap-2">
               <CheckIcon className="size-4 shrink-0 text-accent-ink" />
@@ -125,7 +125,7 @@ export function Hero() {
               </p>
               <SeverityChip level="critica" />
             </div>
-            <p className="mt-1 pl-4.5 font-mono text-xs text-muted">AB·12·34 · hoy 03:12</p>
+            <p className="mt-1 pl-4.5 font-mono text-xs text-muted">AB·12·34 · hoy 3:12 AM</p>
             <div className="mt-3 flex items-center gap-2.5 border-t border-line pt-3">
               <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-danger-soft text-danger">
                 <PowerIcon className="size-4" />

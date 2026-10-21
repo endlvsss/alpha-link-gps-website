@@ -34,7 +34,7 @@ Construido el tramo 1 y la agenda del tramo 2, con datos ficticios y sin integra
 
 | Ruta | Qué hay |
 |---|---|
-| `/` | Landing: portada, «03:12», funciones con capturas reales, GPS + TAG (con simulación), cómo funciona, planes, instalación, preguntas frecuentes |
+| `/` | Landing: portada, «3:12 AM», funciones con capturas reales, señal principal y de respaldo, cómo funciona, planes, instalación, preguntas frecuentes |
 | `/planes` | Comparador completo (tabla en escritorio, pestañas en móvil) |
 | `/checkout` | Plan y periodicidad → datos (RUT validado) → vehículo (patente validada) → dirección (comunas de la RM) → revisión y consentimiento |
 | `/checkout/pago` | Pasarela simulada: aprobar o rechazar el pago |
@@ -61,6 +61,13 @@ Construido el tramo 1 y la agenda del tramo 2, con datos ficticios y sin integra
 - Entradas escalonadas por sección (`data-reveal` + `src/components/landing/reveal-observer.tsx`); sin JavaScript todo queda visible y se respeta «reducir movimiento».
 - Pie de página que cierra con el logo a todo el ancho.
 - Se mantienen a propósito, por identidad de marca: las etiquetas en mayúsculas sobre algunos títulos y la monoespaciada en datos (como alphatecnologia.cl).
+
+### Señal principal y de respaldo (17/10/2026)
+
+- La sección `#doble-senal` (`src/components/landing/double-signal.tsx`) explica el concepto sin mostrar equipos, cableado ni puntos de instalación: un sedán en vista superior dibujado en SVG (volumen por tonos, techo panorámico, luces LED) rodeado por dos campos. Principal: anillo cian que se dibuja al entrar, pulso cada 2,6 s y un barrido tipo radar que gira detrás del vehículo. Respaldo: banda de puntos verdes más amplia que respira cada 4,8 s. Entrada en secuencia (vehículo, principal, respaldo). Pasar el cursor o tocar una tarjeta resalta su señal y muestra una explicación breve. Con movimiento reducido o sin JavaScript todo queda visible y quieto (CSS `.sig-*` en `globals.css`). Rediseñada con la skill impeccable el 17/10/2026; reemplazó una versión con foto.
+- Terminología en toda la landing, planes y pie: «señal principal» y «señal de respaldo» en lugar de GPS + TAG; el menú dice «Dos señales». Los modelos de los equipos solo aparecen en el portal del técnico.
+- La secuencia nocturna usa 3:12–3:15 AM y se presenta como ilustrativa, sin prometer tiempos de respuesta.
+- **Por validar con el equipo técnico antes de publicar:** que la señal de respaldo funcione de forma independiente de la principal y con qué cobertura y precisión; la alerta de desacoplamiento entre ambas señales (sigue en la lista de alertas de Funciones); que la principal sea la que aparece en el mapa del panel; la batería interna de respaldo del equipo principal (FAQ). Revisar también el lema «Tu vehículo, siempre a la vista», que puede leerse como seguimiento ininterrumpido.
 
 ### Menos scroll en el celular (16/10/2026)
 

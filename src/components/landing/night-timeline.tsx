@@ -9,25 +9,25 @@ import { reveal } from "@/lib/reveal";
 // datos de prueba (los mismos de la animación del mapa en vivo).
 const moments: { time: string; title: string; body: string; screen: ReactNode }[] = [
   {
-    time: "03:12",
+    time: "3:12",
     title: "La plataforma lo detecta",
     body: "Alerta crítica de encendido sin autorización, en tu panel y en tu correo.",
     screen: <AlertScreen />,
   },
   {
-    time: "03:13",
+    time: "3:13",
     title: "Lo ves en el mapa",
     body: "Dónde está, si se está moviendo y a qué velocidad, en vivo.",
     screen: <MapScreen />,
   },
   {
-    time: "03:14",
+    time: "3:14",
     title: "Actúas a distancia",
     body: "Activas la sirena desde el celular. Con el vehículo detenido, cortas el suministro.",
     screen: <CommandScreen />,
   },
   {
-    time: "03:15",
+    time: "3:15",
     title: "Llamas al 133 con la ubicación",
     body: "Compartes la posición exacta con Carabineros. No intervienes tú: para eso está el mapa.",
     screen: <ShareScreen />,
@@ -35,7 +35,7 @@ const moments: { time: string; title: string; body: string; screen: ReactNode }[
 ];
 
 /**
- * La noche del robo, minuto a minuto. El reloj avanza con el momento que está
+ * La noche del robo, como secuencia ilustrativa. El reloj avanza con el momento que está
  * en pantalla (en el celular queda fijo arriba mientras bajas). Siempre es de
  * noche: la escena es oscura en los dos temas.
  */
@@ -65,9 +65,9 @@ export function NightTimeline() {
         <div className="lg:sticky lg:top-24 lg:self-start">
           <p
             aria-hidden="true"
-            className={`font-display text-[11rem] leading-none font-bold tracking-[-0.04em] tabular-nums transition-colors duration-500 max-lg:hidden ${tone}`}
+            className={`font-display text-[10rem] leading-none font-bold tracking-[-0.04em] tabular-nums transition-colors duration-500 max-lg:hidden ${tone}`}
           >
-            {moments[active].time}
+            <Clock time={moments[active].time} />
           </p>
           <h2
             id="noche-titulo"
@@ -77,12 +77,11 @@ export function NightTimeline() {
             Tu auto se enciende y no eres tú.
           </h2>
           <p {...reveal(1)} className="mt-4 max-w-md text-lg leading-relaxed text-on-night-muted">
-            Sin un rastreador, lo descubres en la mañana. Con Alpha Link GPS pasa esto, minuto a minuto.
+            Sin un rastreador, lo descubres en la mañana. Así podría verse esa noche con Alpha Link GPS.
           </p>
-          <p {...reveal(2)} className="mt-6 flex max-w-md items-start gap-2 text-sm text-on-night-muted max-lg:hidden">
-            <PowerIcon className="mt-0.5 size-4 shrink-0" />
-            Por seguridad vial, el corte de suministro se usa solo con el vehículo detenido.
-          </p>
+          <div {...reveal(2)} className="max-lg:hidden">
+            <Notes />
+          </div>
         </div>
 
         <div>
@@ -92,7 +91,7 @@ export function NightTimeline() {
             className="sticky top-[65px] z-10 -mx-4 flex items-end justify-between gap-4 bg-night px-4 pt-3 pb-4 sm:-mx-6 sm:px-6 lg:hidden"
           >
             <p className={`font-display text-[4.5rem] leading-[0.9] font-bold tracking-[-0.04em] tabular-nums transition-colors duration-500 ${tone}`}>
-              {moments[active].time}
+              <Clock time={moments[active].time} />
             </p>
             <span className="mb-2 flex gap-1.5">
               {moments.map((m, i) => (
@@ -124,7 +123,7 @@ export function NightTimeline() {
                     <span
                       className={`block text-base font-semibold tabular-nums lg:hidden ${i === 0 ? "text-night-danger" : "text-night-accent"}`}
                     >
-                      {m.time}
+                      <Clock time={m.time} small />
                       <span className="sr-only"> · </span>
                     </span>
                     {m.title}
@@ -135,13 +134,34 @@ export function NightTimeline() {
             ))}
           </ol>
 
-          <p className="mt-8 flex items-start gap-2 text-sm text-on-night-muted lg:hidden">
-            <PowerIcon className="mt-0.5 size-4 shrink-0" />
-            Por seguridad vial, el corte de suministro se usa solo con el vehículo detenido.
-          </p>
+          <div className="mt-2 lg:hidden">
+            <Notes />
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+/** Hora de madrugada: «AM» más chico que la hora, pero legible. */
+function Clock({ time, small = false }: { time: string; small?: boolean }) {
+  return (
+    <>
+      {time}
+      <span className={small ? "ml-1 text-[0.75em] font-semibold" : "ml-[0.14em] text-[0.3em] font-semibold tracking-[0.02em]"}>AM</span>
+    </>
+  );
+}
+
+function Notes() {
+  return (
+    <div className="mt-6 max-w-md space-y-2 text-sm text-on-night-muted">
+      <p className="flex items-start gap-2">
+        <PowerIcon className="mt-0.5 size-4 shrink-0" />
+        Por seguridad vial, el corte de suministro se usa solo con el vehículo detenido.
+      </p>
+      <p className="pl-6">Secuencia ilustrativa con datos de prueba. Los tiempos reales dependen de la señal y de cuándo revises la alerta.</p>
+    </div>
   );
 }
 
@@ -168,7 +188,7 @@ function AlertScreen() {
             <span className="shrink-0 rounded-full bg-night-danger px-2 py-0.5 text-xs font-semibold text-night">Crítica</span>
           </div>
           <p className="mt-1 text-sm text-on-night-muted">
-            <span className="tabular-nums">AB·12·34</span> · Toyota Yaris · hoy 03:12
+            <span className="tabular-nums">AB·12·34</span> · Toyota Yaris · hoy 3:12 AM
           </p>
         </div>
       </div>

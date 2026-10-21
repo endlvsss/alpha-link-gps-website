@@ -211,13 +211,6 @@
   }
 }
 
-/* Trazo "en movimiento" del vínculo GPS/TAG. */
-@keyframes dash {
-  to {
-    stroke-dashoffset: -26;
-  }
-}
-
 /* Entradas por sección: el título, luego el texto, luego lo demás. Sin JavaScript
    (sin la clase .js en <html>) todo queda visible. */
 @media (prefers-reduced-motion: no-preference) {
@@ -250,4 +243,142 @@
     animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
   }
+}
+
+/* Sección «Una señal principal. Un respaldo adicional.»: entrada en secuencia
+   (vehículo → señal principal → respaldo) y pulsos con ritmos distintos. Es un
+   recurso narrativo, no una demostración del comportamiento técnico. Sin
+   JavaScript o con movimiento reducido, todo queda visible y quieto. */
+.sig-car,
+.sig-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.sig-car {
+  transition:
+    opacity 900ms var(--ease-out-expo),
+    transform 900ms var(--ease-out-expo);
+}
+
+.sig-enter-p,
+.sig-enter-r {
+  transition:
+    opacity 700ms var(--ease-out-expo),
+    translate 700ms var(--ease-out-expo);
+}
+
+.sig-enter-p {
+  transition-delay: 550ms;
+}
+
+.sig-enter-r {
+  transition-delay: 1150ms;
+}
+
+html.js .sig-root[data-sig="out"] .sig-car {
+  opacity: 0;
+  transform: scale(0.94);
+}
+
+/* El campo principal se dibuja alrededor del vehículo. */
+.sig-draw {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1200ms var(--ease-out-expo) 650ms;
+}
+
+html.js .sig-root[data-sig="out"] .sig-draw {
+  stroke-dashoffset: var(--len);
+}
+
+/* Barrido tipo radar del campo principal y respiración de la banda de respaldo. */
+.sig-sweep {
+  background: conic-gradient(from 0deg, transparent 0deg 285deg, rgb(83 216 234 / 0.2) 358deg, transparent 360deg);
+  opacity: 0;
+  transition: opacity 600ms ease 1.6s;
+}
+
+.sig-root[data-sig="in"] .sig-sweep {
+  opacity: 1;
+  animation: sig-spin 7s linear 1.6s infinite;
+}
+
+.sig-root[data-sig="in"] .sig-breathe {
+  animation: sig-breathe 4.8s ease-in-out 2s infinite;
+}
+
+.sig-root[data-play="off"] :is(.sig-sweep, .sig-breathe) {
+  animation-play-state: paused;
+}
+
+@keyframes sig-spin {
+  to {
+    rotate: 1turn;
+  }
+}
+
+@keyframes sig-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sig-sweep {
+    display: none;
+  }
+}
+
+html.js .sig-root[data-sig="out"] :is(.sig-enter-p, .sig-enter-r) {
+  opacity: 0;
+  translate: 0 10px;
+}
+
+.sig-pulse {
+  opacity: 0;
+}
+
+.sig-root[data-sig="in"] .sig-pulse-p {
+  animation: sig-pulse 2.6s cubic-bezier(0.25, 0.6, 0.3, 1) 1.3s infinite;
+}
+
+.sig-root[data-sig="in"] .sig-pulse-p2 {
+  animation-delay: 2.6s;
+}
+
+.sig-root[data-sig="in"] .sig-pulse-r {
+  animation: sig-pulse 4.8s cubic-bezier(0.25, 0.6, 0.3, 1) 2s infinite;
+}
+
+.sig-root[data-play="off"] .sig-pulse {
+  animation-play-state: paused;
+}
+
+@keyframes sig-pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  18% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.16);
+  }
+}
+
+/* Resaltar una señal: la otra se atenúa. */
+.sig-p,
+.sig-r {
+  transition: opacity 300ms ease;
+}
+
+.sig-root[data-active="p"] .sig-r,
+.sig-root[data-active="r"] .sig-p {
+  opacity: 0.22;
 }

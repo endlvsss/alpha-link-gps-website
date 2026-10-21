@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "¿Qué pasa si desconectan la batería del auto?",
-    a: "El GPS tiene una batería interna de respaldo. Además, en los planes Seguridad y Flota el TAG funciona con su propia pila y sin red celular: si se separa del GPS, te llega una alerta de desacoplamiento.",
+    a: "El equipo principal tiene una batería interna de respaldo. Además, los planes Seguridad y Flota suman una señal de respaldo, como otra forma de ayudarte a localizar tu vehículo.",
   },
   {
     q: "¿Y si usan un inhibidor de señal?",

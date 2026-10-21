@@ -10,7 +10,7 @@ const columns: { title: string; links: { label: string; href?: string; note?: st
     links: [
       { label: "Cómo funciona", href: "/#como-funciona" },
       { label: "Funciones", href: "/#funciones" },
-      { label: "Doble señal GPS + TAG", href: "/#doble-senal" },
+      { label: "Señal principal y de respaldo", href: "/#doble-senal" },
       { label: "Planes y precios", href: "/#planes" },
       { label: "Comparar planes", href: "/planes" },
     ],
@@ -35,7 +35,7 @@ const columns: { title: string; links: { label: string; href?: string; note?: st
 const trust: { icon: ReactNode; text: string }[] = [
   { icon: <LockIcon className="size-5" />, text: "Pago seguro con Webpay" },
   { icon: <MapPinIcon className="size-5" />, text: "Instalación a domicilio en la RM" },
-  { icon: <ShieldIcon className="size-5" />, text: "Doble señal GPS 4G + TAG" },
+  { icon: <ShieldIcon className="size-5" />, text: "Señal principal y de respaldo" },
 ];
 
 export function SiteFooter() {

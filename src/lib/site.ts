@@ -30,7 +30,7 @@ export const site = {
 export const nav = [
   { href: "/#como-funciona", label: "Cómo funciona" },
   { href: "/#funciones", label: "Funciones" },
-  { href: "/#doble-senal", label: "GPS + TAG" },
+  { href: "/#doble-senal", label: "Dos señales" },
   { href: "/#planes", label: "Planes" },
   { href: "/#preguntas", label: "Preguntas" },
 ] as const;

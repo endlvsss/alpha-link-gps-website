@@ -8,8 +8,8 @@ import { site } from "@/lib/site";
 const acta = [
   { label: "Patente verificada", value: "KJ·TR·42" },
   { label: "Fotos del vehículo antes de instalar", value: "5" },
-  { label: "GPS 4G conectado y oculto", value: "OK" },
-  { label: "TAG instalado en otro lugar", value: "OK" },
+  { label: "Señal principal conectada", value: "OK" },
+  { label: "Señal de respaldo verificada", value: "OK" },
   { label: "Prueba de posición y comunicación", value: "OK" },
   { label: "Corte y sirena probados, vehículo detenido", value: "OK" },
 ];
