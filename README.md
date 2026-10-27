@@ -28,9 +28,9 @@ Abre http://localhost:3000.
 | 2B / 2C · Excepciones | – | Reprogramar, cancelar, no-show, técnico no disponible, instalación fallida | Cliente / técnico |
 | Back-office | – | Instaladores, agenda, visitas, dispositivos | Operaciones (al final, dentro del CRM) |
 
-## Estado actual (15/10/2026)
+## Estado actual (27/10/2026)
 
-Construido el tramo 1 y la agenda del tramo 2, con datos ficticios y sin integraciones:
+Construidos el tramo 1, la agenda y el portal del técnico del tramo 2, con datos ficticios y sin integraciones. Los cambios de cada fecha están en las secciones de más abajo. Falta el back-office de Operaciones (A1–A6 de la especificación), que irá dentro del CRM.
 
 | Ruta | Qué hay |
 |---|---|
@@ -40,6 +40,7 @@ Construido el tramo 1 y la agenda del tramo 2, con datos ficticios y sin integra
 | `/checkout/pago` | Pasarela simulada: aprobar o rechazar el pago |
 | `/checkout/confirmacion` | CUENTA CREADA, «Instalación pendiente» y paso a la agenda |
 | `/agenda` | Días y bloques reales por comuna, retención de 10 min, confirmación con `.ics`; sin cupo → ampliar rango → lista de espera |
+| `/instalador/*` | Portal del técnico freelance, pantallas I1–I9 (ver «Portal del técnico freelance») |
 
 - La compra vive en `sessionStorage` (`src/lib/purchase-store.ts`). Cada etapa ofrece «Usar datos de ejemplo» para revisarla sin llenar el formulario.
 - Al pie del flujo de compra hay un panel **Demo interna** con el estado del cliente según el blueprint (LEAD → PAGADO → INSTALACIÓN AGENDADA) y los eventos.
