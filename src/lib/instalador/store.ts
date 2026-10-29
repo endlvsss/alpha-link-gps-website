@@ -36,8 +36,8 @@ export interface PortalState {
 
 const KEY = "alg-instalador-v1";
 
-/** Las reservas hechas por clientes en la agenda online (demo) sobreviven al cambio de día. */
-const fromClient = (v: Visit) => v.id.startsWith("web-");
+/** Las reservas del cliente (agenda online) y las asignadas desde el CRM (demo) sobreviven al cambio de día. */
+const fromClient = (v: Visit) => v.id.startsWith("web-") || v.id.startsWith("crm-");
 
 function fresh(session: PortalState["session"] = null, keep: Visit[] = []): PortalState {
   const today = todayIso(Date.now());

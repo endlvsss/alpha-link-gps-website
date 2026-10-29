@@ -6,6 +6,8 @@ import { AlertIcon, ChevronLeftIcon, CloseIcon } from "@/components/ui/icons";
 import { clientStatus, STATUS_LABEL, STATUS_TONE, type Tone } from "@/lib/instalador/rules";
 import type { Visit, VisitStatus } from "@/lib/instalador/model";
 import { usePortal } from "@/lib/instalador/store";
+import { enlaceVisitaAlCrm } from "@/lib/integracion-crm";
+import { URL_CRM } from "@/lib/eventos";
 
 const toneClass: Record<Tone, string> = {
   accent: "bg-accent-soft text-accent-ink",
@@ -113,8 +115,28 @@ export function CrmPanel({ visit }: { visit: Visit }) {
         {st.substate && <span>/ {st.substate}</span>}
       </summary>
       <p className="mt-2 text-muted">
-        Simulación: no se envía nada al CRM, al Service Desk ni a la plataforma GPS.
+        Simulación: no se envía nada al Service Desk ni a la plataforma GPS. Al cerrar o reportar
+        una falla, «Enviar resultado al CRM» abre el CRM de demo con el resultado listo para aplicar.
       </p>
+      <div className="mt-3 flex flex-wrap gap-2">
+        {(visit.estado === "cerrada_ok" || visit.estado === "fallida") && (
+          <button
+            type="button"
+            onClick={() => window.open(enlaceVisitaAlCrm(visit), "_blank", "noopener")}
+            className="inline-flex min-h-11 items-center rounded-xl bg-ink px-4 text-sm font-semibold text-bg active:opacity-90"
+          >
+            Enviar resultado al CRM ↗
+          </button>
+        )}
+        <a
+          href={`${URL_CRM}/ventas`}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex min-h-11 items-center rounded-xl border border-line-strong px-4 text-sm font-medium text-ink-soft"
+        >
+          Abrir CRM ↗
+        </a>
+      </div>
       <ol className="mt-3 space-y-1.5">
         {visit.events.map((e, i) => (
           <li key={`${e.at}-${i}`} className="flex gap-3">

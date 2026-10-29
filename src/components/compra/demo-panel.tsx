@@ -1,6 +1,8 @@
 "use client";
 
 import { crmStatus, resetPurchase, usePurchase } from "@/lib/purchase-store";
+import { enlaceCompraAlCrm } from "@/lib/integracion-crm";
+import { URL_CRM } from "@/lib/eventos";
 
 const timeFormat = new Intl.DateTimeFormat("es-CL", { hour: "2-digit", minute: "2-digit" });
 
@@ -21,8 +23,8 @@ export function DemoPanel() {
       </summary>
       <div className="mt-3 rounded-2xl border border-dashed border-line-strong p-5 text-sm">
         <p className="text-muted">
-          Simulación sin integraciones: no se cobra ni se envía nada al CRM, la pasarela o la
-          plataforma GPS. La disponibilidad de técnicos es ficticia.
+          Simulación: no se cobra ni se envía nada a la pasarela ni a la plataforma GPS. «Enviar al
+          CRM» abre el CRM de demo con esta compra lista para aplicar (en producción llegará sola).
         </p>
         {purchase.events.length > 0 ? (
           <ol className="mt-4 space-y-1.5 font-mono text-xs">
@@ -36,13 +38,35 @@ export function DemoPanel() {
         ) : (
           <p className="mt-4 font-mono text-xs text-muted">Sin eventos todavía.</p>
         )}
-        <button
-          type="button"
-          onClick={() => resetPurchase()}
-          className="mt-4 rounded-lg border border-line-strong px-3 py-1.5 text-xs font-medium text-ink-soft hover:bg-ink/[0.05]"
-        >
-          Reiniciar compra
-        </button>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {purchase.order && (
+            <button
+              type="button"
+              onClick={() => window.open(enlaceCompraAlCrm(purchase), "_blank", "noopener")}
+              className="rounded-lg bg-ink px-3 py-1.5 text-xs font-semibold text-bg hover:opacity-90"
+            >
+              Enviar al CRM (demo) ↗
+            </button>
+          )}
+          <a
+            href={URL_CRM}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-lg border border-line-strong px-3 py-1.5 text-xs font-medium text-ink-soft hover:bg-ink/[0.05]"
+          >
+            Abrir CRM ↗
+          </a>
+          <button
+            type="button"
+            onClick={() => resetPurchase()}
+            className="rounded-lg border border-line-strong px-3 py-1.5 text-xs font-medium text-ink-soft hover:bg-ink/[0.05]"
+          >
+            Reiniciar compra
+          </button>
+        </div>
+        {!purchase.order && (
+          <p className="mt-2 text-xs text-muted">«Enviar al CRM» aparece cuando la compra llega al pago.</p>
+        )}
       </div>
     </details>
   );

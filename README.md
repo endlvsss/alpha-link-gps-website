@@ -115,6 +115,15 @@ Web móvil en `/instalador`, según la especificación v0.2 (pantallas I1–I9).
 - Verificado el 16/10/2026: recorrido completo y excepciones con Playwright a 390 px, axe sin hallazgos en ambos temas, `npm run build`. **Falta probar en teléfonos reales** (cámara, teclado, zonas seguras, GPS).
 - **Por definir con Operaciones:** espera antes del no-show (15 min) e intentos (2), límite para iniciar trayecto (45 min antes), ventana de privacidad (24 h / 48 h), cupo máximo (3), cobro de visita en no-show, motivos de bloqueo y de «No puedo asistir», y la verificación manual «GPS reporta» mientras la plataforma no tenga API (D9).
 
+### Conexión con el CRM (27/10/2026, demo)
+
+El CRM de Alpha Link (`../alpha-crm`, http://localhost:3200) recibe y envía **eventos de integración** con un contrato versionado (`src/lib/eventos.ts`, idéntico al del CRM; constructores en `src/lib/integracion-crm.ts`). En la demo viajan en el enlace y se aplican con un clic; en producción serán llamadas a la API del CRM.
+
+- **Compra:** «Demo interna» → «Enviar al CRM (demo)» (aparece cuando hay orden). Lleva cliente, vehículos, dirección, plan, orden y reserva, indicando si el bloque salió del técnico del portal.
+- **Portal del técnico:** en una visita cerrada o fallida, «Demo interna» → «Enviar resultado al CRM» (IMEI, checklist, fotos, firma o causa de la falla).
+- **Desde el CRM:** `/instalador/importar` recibe una visita asignada por Operaciones y la agrega a la agenda del técnico como «Por confirmar». Revisa que no choque con otra visita y que no se duplique. Esas visitas (`crm-…`) sobreviven al cambio de día, como las del cliente (`web-…`).
+- El técnico de demo (Diego Fuentes, RUT 15.678.901-1) es el mismo en ambos sistemas. La URL del CRM se cambia con `NEXT_PUBLIC_CRM_URL`.
+
 ## Reglas de contenido
 
 - Mostrar solo funciones **validadas**. Corte de suministro y sirena **sí se ofrecen** (decisión del 15/10/2026), siempre con la regla de usar el corte solo con el vehículo detenido.
